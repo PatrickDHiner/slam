@@ -444,6 +444,8 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
             download_dict[listener.uid] = download_status
         sendStatusMessage(update, bot)
         drive.download(link)
+        if is_gdtot:
+          drive.deletefile(link)
 
     elif bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
