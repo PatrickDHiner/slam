@@ -330,7 +330,6 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
     message_args = mesg[0].split(' ')
     name_args = mesg[0].split('|')
     qbitsel = False
-    is_gdtot = False
     try:
         link = message_args[1]
         if link == "s":
@@ -409,7 +408,6 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
         return
     elif not os.path.exists(link) and not bot_utils.is_mega_link(link) and not bot_utils.is_gdrive_link(link) and not bot_utils.is_magnet(link):
         try:
-            is_gdtot = bot_utils.is_gdtot_link(link)
             link = direct_link_generator(link)
         except DirectDownloadLinkException as e:
             LOGGER.info(e)
@@ -444,8 +442,6 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
             download_dict[listener.uid] = download_status
         sendStatusMessage(update, bot)
         drive.download(link)
-        if is_gdtot:
-          drive.deletefile(link)
 
     elif bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
