@@ -1,3 +1,5 @@
+#!/bin/bash
+
 tracker_list=$(curl -Ns https://github.com/XIU2/TrackersListCollection/raw/master/all.txt https://github.com/ngosang/trackerslist/raw/master/trackers_all.txt https://newtrackon.com/api/all https://github.com/DeSireFire/animeTrackerList/raw/master/AT_all.txt https://github.com/hezhijie0327/Trackerslist/raw/main/trackerslist_combine.txt https://torrends.to/torrent-tracker-list/?download=latest | awk '$0' | tr '\n\n' ',')
 aria2c --enable-rpc --check-certificate=false \
    --max-connection-per-server=16 --rpc-max-request-size=1024M --bt-max-peers=0 \
